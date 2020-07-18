@@ -7,7 +7,7 @@
     <div class="col-md-8">
       <div class="card">
         <div class="card-header">
-          <h5 class="title">Edit Profile</h5>
+          <h5 class="title">Register Your Course</h5>
         </div>
         <div class="card-body">
           <form>
@@ -81,6 +81,8 @@
                 </div>
               </div>
             </div>
+
+            <button class="btn btn-primary">Register</button>
           </form>
         </div>
       </div>
