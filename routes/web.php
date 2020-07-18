@@ -15,13 +15,14 @@ Route::get('/', function () {
     return redirect()->route("login");
 });
 
-Route::get('/admin', function () {
-    return view('admin.dashboard');
-});
+Route::get('/admin', 'AdminController@adminDashboard')->name("admin.dashboard")->middleware(['auth', 'admin']);
 
-Route::get('/users', function () {
-    return view('users.users');
-});
+Route::get('/users', 'AdminController@userDashboard')->middleware('auth');
+
+Route::post('/users', 'CoursesController@addCourse')->name('course.register')->middleware('auth');
+
+Route::get('/course-lists', 'CoursesController@courseList')->name('users.courses')->middleware('auth');
+
 
 Auth::routes();
 

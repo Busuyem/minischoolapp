@@ -18,31 +18,74 @@
                   Name
                 </th>
                 <th>
-                  Country
+                  Reg No:
                 </th>
                 <th>
-                  City
+                  E-mail Address
+                </th>
+
+                <th>
+                  Department
+              </th>
+
+                <th>
+                    Registered Course(s)
                 </th>
                 <th class="text-right">
-                  Salary
+                  Action
                 </th>
               </thead>
               <tbody>
+                @foreach ($users as $user)
+                    
+                
                 <tr>
                   <td>
-                    Dakota Rice
+                    {{$user->first_name}} {{$user->last_name}}
                   </td>
                   <td>
-                    Niger
+                    2020/{{$user->code}}
                   </td>
                   <td>
-                    Oud-Turnhout
+                    {{$user->email}}
+                   
                   </td>
+
+                  <td>
+                    {{$user->course}}
+                   
+                  </td>
+
+                  <td>
+                    @foreach($user->courses as $course)
+                      {{$course->course}}
+                    @endforeach
+                  </td>
+
+                  <td>
+                   
+                    
+                  </td>
+
                   <td class="text-right">
-                    $36,738
+
+                    <div class="d-flex flex-row float-right">
+
+                      <a href="" class="btn btn-info">Edit</a>
+
+                      <form action="" method="post">
+
+                        <button class="btn btn-danger ml-1">Delete</button>
+
+                      </form>
+
+                    </div>
+                     
+
+
                   </td>
                 </tr>
-                  
+                @endforeach
               </tbody>
             </table>
           </div>

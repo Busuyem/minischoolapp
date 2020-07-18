@@ -18,6 +18,7 @@
   <link href="{{asset('/assets/css/now-ui-dashboard.css?v=1.3.0')}}" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="asset('/assets/demo/demo.css')}}" rel="stylesheet" />
+  <script src="{{asset('/js/app.js')}}"></script>
 </head>
 
 <body class="user-profile">
@@ -38,54 +39,21 @@
       <!--Sidebar for User-->
       <div class="sidebar-wrapper" id="sidebar-wrapper">
         <ul class="nav">
-          <li>
-            <a href="./dashboard.html">
+          <li class="active">
+            <a href="{{route("course.register")}}">
               <i class="now-ui-icons design_app"></i>
               <p>Dashboard</p>
             </a>
           </li>
+          
           <li>
-            <a href="./icons.html">
-              <i class="now-ui-icons education_atom"></i>
-              <p>Icons</p>
-            </a>
-          </li>
-          <li>
-            <a href="./map.html">
-              <i class="now-ui-icons location_map-big"></i>
-              <p>Maps</p>
-            </a>
-          </li>
-          <li>
-            <a href="./notifications.html">
+            <a href="{{route("users.courses")}}">
               <i class="now-ui-icons ui-1_bell-53"></i>
-              <p>Notifications</p>
-            </a>
-          </li>
-          <li class="active ">
-            <a href="./user.html">
-              <i class="now-ui-icons users_single-02"></i>
-              <p>User Profile</p>
+              <p>Your Registered Courses</p>
             </a>
           </li>
           <li>
-            <a href="./tables.html">
-              <i class="now-ui-icons design_bullet-list-67"></i>
-              <p>Table List</p>
-            </a>
-          </li>
-          <li>
-            <a href="./typography.html">
-              <i class="now-ui-icons text_caps-small"></i>
-              <p>Typography</p>
-            </a>
-          </li>
-          <li class="active-pro">
-            <a href="./upgrade.html">
-              <i class="now-ui-icons arrows-1_cloud-download-93"></i>
-              <p>Upgrade to PRO</p>
-            </a>
-          </li>
+          
         </ul>
       </div>
 
@@ -107,7 +75,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">User Profile</a>
+          <a class="navbar-brand" href="{{route('users.courses')}}">User Profile</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -141,10 +109,23 @@
                     <span class="d-lg-none d-md-block">Some Actions</span>
                   </p>
                 </a>
+
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                   <a class="dropdown-item" href="#">Action</a>
+                  
                   <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
+
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                         onclick="event.preventDefault();
+                                       document.getElementById('logout-form').submit();">
+                          {{ __('Logout') }}
+                      </a>
+
+                      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                          @csrf
+                      </form>
+                  
+                  
                 </div>
               </li>
               <li class="nav-item">

@@ -23,6 +23,12 @@ class User extends Authenticatable
     */
 
     protected $guarded = [];
+
+    public function courses(){
+
+        return $this->hasMany(Course::class);
+    }
+    
     /**
      * The attributes that should be hidden for arrays.
      *

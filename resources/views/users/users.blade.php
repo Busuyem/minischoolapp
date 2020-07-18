@@ -7,86 +7,241 @@
     <div class="col-md-8">
       <div class="card">
         <div class="card-header">
-          <h5 class="title">Register Your Course</h5>
+          <h5 class="title">Course Registration Form</h5>
         </div>
         <div class="card-body">
-          <form>
+        <form method="POST" action="{{route('course.register')}}">
+          @csrf
             <div class="row">
               <div class="col-md-5 pr-1">
                 <div class="form-group">
-                  <label>Company (disabled)</label>
-                  <input type="text" class="form-control" disabled="" placeholder="Company" value="Creative Code Inc.">
+                  <label for="course"><b>Choose Your Course Code</b></label>
+                  <select id="course" name="course" class="form-control @error('course') is-invalid @enderror">
+                    <option selected disabled>Select</option>
+                    <option>MAT 101</option>
+                    <option>ENG 201 </option>
+                    <option>EDU 111</option>
+                    <option>SOS 106</option>
+                    <option>POL 205</option>
+                  </select>
+
+                  @error('course')
+                  <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
+
                 </div>
               </div>
               <div class="col-md-3 px-1">
                 <div class="form-group">
-                  <label>Username</label>
-                  <input type="text" class="form-control" placeholder="Username" value="michael23">
+                  <label><b>Registration Number</b></label>
+                <input type="text" class="form-control @error('reg') is-invalid @enderror" readonly name="reg" value="2020/{{auth()->user()->code}}">
+
+                @error('reg')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+
                 </div>
               </div>
+
               <div class="col-md-4 pl-1">
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Email address</label>
-                  <input type="email" class="form-control" placeholder="Email">
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6 pr-1">
-                <div class="form-group">
-                  <label>First Name</label>
-                  <input type="text" class="form-control" placeholder="Company" value="Mike">
-                </div>
-              </div>
-              <div class="col-md-6 pl-1">
-                <div class="form-group">
-                  <label>Last Name</label>
-                  <input type="text" class="form-control" placeholder="Last Name" value="Andrew">
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label>Address</label>
-                  <input type="text" class="form-control" placeholder="Home Address" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09">
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-4 pr-1">
-                <div class="form-group">
-                  <label>City</label>
-                  <input type="text" class="form-control" placeholder="City" value="Mike">
-                </div>
-              </div>
-              <div class="col-md-4 px-1">
-                <div class="form-group">
-                  <label>Country</label>
-                  <input type="text" class="form-control" placeholder="Country" value="Andrew">
-                </div>
-              </div>
-              <div class="col-md-4 pl-1">
-                <div class="form-group">
-                  <label>Postal Code</label>
-                  <input type="number" class="form-control" placeholder="ZIP Code">
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label>About Me</label>
-                  <textarea rows="4" cols="80" class="form-control" placeholder="Here can be your description" value="Mike">Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</textarea>
+                  <label for="exampleInputEmail1"><b>Email address</b></label>
+                <input type="email" class="form-control"  name="email" readonly value="{{auth()->user()->email}}">
+
+                @error('email')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+
                 </div>
               </div>
             </div>
 
-            <button class="btn btn-primary">Register</button>
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label><b>First Name</b></label>
+                <input type="text" class="form-control" readonly name="first_name" value="{{auth()->user()->first_name}}">
+
+                @error('first_name')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label><b>Last Name</b></label>
+                <input type="text" class="form-control" readonly name="last_name" value="{{auth()->user()->last_name}}">
+
+                @error('last_name')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+
+                </div>
+              </div>
+            </div>
+
+                
+            <div class="row">
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <label><b>Department</b></label>
+                <input type="text" class="form-control @error('dept') is-invalid @enderror" name="dept" placeholder="Departmet">
+
+                @error('dept')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+
+                </div>
+              </div>
+              <div class="col-md-4 px-1">
+                <div class="form-group">
+                  <label><b>Course Lecturer's Name</b></label>
+                  <input type="text" class="form-control @error('lecturer') is-invalid @enderror" name="lecturer" placeholder="Course Lecturer Name">
+
+                  @error('lecturer')
+                  <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
+                </div>
+              </div>
+              <div class="col-md-4 pl-1">
+                <div class="form-group"> 
+                  <label><b>Course Unit(s)</b></label>
+                  <input type="number" class="form-control @error('unit') is-invalid @enderror" name="unit" placeholder="Course Number of Unit(s)" min="0" max="3">
+
+                  @error('unit')
+                  <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
+                </div>
+              </div>
+            </div>
+
+                 
+            <div class="row">
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <label><b>Session Year</b></label>
+                <input type="text" class="form-control @error('session') is-invalid @enderror" name="session" placeholder="Current Session">
+
+                @error('session')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+                </div>
+              </div>
+              <div class="col-md-4 px-1">
+                <div class="form-group">
+                  <label><b>Semester</b></label>
+                  <input type="text" class="form-control @error('semester') is-invalid @enderror" name="semester" placeholder="First or Second Semester">
+                  @error('semester')
+                  <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
+
+                </div>
+              </div>
+              <div class="col-md-4 pl-1">
+                <div class="form-group"> 
+                  <label><b>Course Attempt Status</b></label>
+                  <input type="text" class="form-control @error('status') is-invalid @enderror" name="status" placeholder="Fresher or Repeater">
+
+                  @error('status')
+                  <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
+
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label><b>Contact Address</b></label>
+                <input type="text" class="form-control" name="address" readonly value="{{auth()->user()->address}}">
+
+                @error('address')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+
+                </div>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <label><b>City</b></label>
+                <input type="text" class="form-control" name="city" readonly value="{{auth()->user()->city}}">
+
+                @error('city')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+
+                </div>
+              </div>
+              <div class="col-md-4 px-1">
+                <div class="form-group">
+                  <label><b>Country</b></label>
+                <input type="text" class="form-control" name="country" readonly placeholder="Country" value="{{auth()->user()->country}}">
+
+                @error('country')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+
+                </div>
+              </div>
+              <div class="col-md-4 pl-1">
+                <div class="form-group">
+                  <label><b>Phone Number</b></label>
+                <input type="text" class="form-control" readonly name="phone_number" value="{{auth()->user()->phone_number}}">
+                
+                @error('phone_number')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+
+                </div>
+              </div>
+            </div>
+
+            <div class="row  d-flex align-item-center justify-content-center">
+
+              <button type="submit" class="btn btn-primary"><b>Register</b></button>
+            </div>
           </form>
         </div>
       </div>
     </div>
+
+    
     <div class="col-md-4">
       <div class="card card-user">
         <div class="image">
@@ -96,16 +251,17 @@
           <div class="author">
             <a href="#">
               <img class="avatar border-gray" src="{{asset('/assets/img/mike.jpg')}}" alt="...">
-              <h5 class="title">Mike Andrew</h5>
+              <h5 class="title">{{auth()->user()->first_name}} {{auth()->user()->last_name}}</h5>
             </a>
             <p class="description">
-              michael24
+             <b>Registration No: 2020/{{auth()->user()->code}}</b> 
+            </p>
+            <p class="description">
+              {{auth()->user()->phone_number}}
             </p>
           </div>
           <p class="description text-center">
-            "Lamborghini Mercy
-            <br> Your chick she so thirsty
-            <br> I'm in that two seat Lambo"
+            {{auth()->user()->address}}
           </p>
         </div>
         <hr>
@@ -117,10 +273,11 @@
             <i class="fab fa-twitter"></i>
           </button>
           <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-            <i class="fab fa-google-plus-g"></i>
+            <i class="fab fa-instagram"></i>
           </button>
         </div>
       </div>
     </div>
   </div>
+
 @endsection
