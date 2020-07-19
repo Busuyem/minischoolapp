@@ -15,15 +15,31 @@ Route::get('/', function () {
     return redirect()->route("login");
 });
 
+Route::fallback(function() {
+    return redirect()->route("login");
+});
+
+Auth::routes();
+
+//Route::get('/home', 'HomeController@index')->name('home');
+
 Route::get('/admin', 'AdminController@adminDashboard')->name("admin.dashboard")->middleware(['auth', 'admin']);
 
-Route::get('/users', 'AdminController@userDashboard')->middleware('auth');
+Route::get('/users', 'AdminController@userDashboard')->name('user.dashboard')->middleware('auth');
+
+Route::delete('/admin/user/{user}', 'AdminController@deleteUser')->name('user.destroy')->middleware(['auth', 'admin']);
 
 Route::post('/users', 'CoursesController@addCourse')->name('course.register')->middleware('auth');
 
 Route::get('/course-lists', 'CoursesController@courseList')->name('users.courses')->middleware('auth');
 
+Route::get('/course-lists/edit/{id}', 'CoursesController@editCourse')->name('course.edit')->middleware('auth');
 
-Auth::routes();
+Route::put('/course-lists/edit/{course}', 'CoursesController@updateCourse')->name('course.update')->middleware('auth');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::delete('/course-lists/edit/{course}', 'CoursesController@deleteCourse')->name('course.destroy')->middleware('auth');
+
+
+
+
+

@@ -32,7 +32,7 @@ class RegisterController extends Controller
 
     protected function redirectTo(){
 
-        if(auth()->user()->id === 1){
+        if(auth()->user()->email === "admin@gmail.com"){
 
             return "/admin";
 
@@ -74,9 +74,18 @@ class RegisterController extends Controller
             'country' => ['required', 'string', 'max:255'],
             'gender' => ['required', 'string', 'max:255'],
             'course' => ['required', 'string', 'max:255'],
-            'image' => ['sometimes', 'file', 'image', 'max:2000'],
+            'image'=>   'file|image|max:1999|mimes:jpeg,jpg,png',
+            
         ]);
+
+        if($data->has('image')){
+
+            $data['image'] = $data->image->store('images', 'public');
+
+            
+        }
         
+        dd($data['image']);
 
         
     }

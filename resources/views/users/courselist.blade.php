@@ -6,6 +6,7 @@
  <div class="row">
         <div class="col-md-8">
           <div class="card">
+            @include('inc.message')
             <div class="card-header">
               <h4 class="card-title">Your Registered Course(s) Details</h4>
             </div>
@@ -48,7 +49,19 @@
                         {{$course->unit}}
                       </td>
                       <td class="text-right">
-                       a
+
+                        <div class="d-flex flex-row float-right">
+
+                        <a href="{{route('course.edit', $course)}}" class="btn-sm btn btn-info text-white"><i class="fas fa-edit"></i></a>
+    
+                        <form action="{{route('course.update', $course)}}" method="post">
+                            @method('delete')
+                            @csrf
+                            <button class="ml-1 bg-white text-danger"><i class="fas fa-trash-alt"></i></button>
+    
+                          </form>
+    
+                        </div>
                       </td>
                     </tr>
                       

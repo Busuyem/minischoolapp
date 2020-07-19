@@ -5,20 +5,22 @@
 @section('content')
 <div class="row">
     <div class="col-md-8">
-      @include('inc.message')
       <div class="card">
+        @include('inc.message')
         <div class="card-header">
           <h5 class="title">Course Registration Form</h5>
         </div>
         <div class="card-body">
-        <form method="POST" action="{{route('course.register')}}">
+        <form method="POST" action="{{route('course.update', $course)}}">
           @csrf
+          @method('put')
+
             <div class="row">
               <div class="col-md-5 pr-1">
                 <div class="form-group">
                   <label for="course"><b>Choose Your Course Code</b></label>
                   <select id="course" name="course" class="form-control @error('course') is-invalid @enderror">
-                    <option selected disabled>Select</option>
+                  <option selected disabled>{{$course->user->course}}</option>
                     <option>MAT 101</option>
                     <option>ENG 201 </option>
                     <option>EDU 111</option>
@@ -97,7 +99,7 @@
               <div class="col-md-4 pr-1">
                 <div class="form-group">
                   <label><b>Department</b></label>
-                <input type="text" class="form-control @error('dept') is-invalid @enderror" name="dept" placeholder="Departmet">
+                <input type="text" class="form-control @error('dept') is-invalid @enderror" name="dept" placeholder="Departmet" value="{{$course->dept}}">
 
                 @error('dept')
                 <span class="invalid-feedback" role="alert">
@@ -110,7 +112,7 @@
               <div class="col-md-4 px-1">
                 <div class="form-group">
                   <label><b>Course Lecturer's Name</b></label>
-                  <input type="text" class="form-control @error('lecturer') is-invalid @enderror" name="lecturer" placeholder="Course Lecturer Name">
+                  <input type="text" class="form-control @error('lecturer') is-invalid @enderror" name="lecturer" placeholder="Course Lecturer Name" value="{{ $course->lecturer}}">
 
                   @error('lecturer')
                   <span class="invalid-feedback" role="alert">
@@ -122,7 +124,7 @@
               <div class="col-md-4 pl-1">
                 <div class="form-group"> 
                   <label><b>Course Unit(s)</b></label>
-                  <input type="number" class="form-control @error('unit') is-invalid @enderror" name="unit" placeholder="Course Number of Unit(s)" min="0" max="3">
+                  <input type="number" class="form-control @error('unit') is-invalid @enderror" name="unit" placeholder="Course Number of Unit(s)" min="0" max="3" value="{{$course->unit}}">
 
                   @error('unit')
                   <span class="invalid-feedback" role="alert">
@@ -138,7 +140,7 @@
               <div class="col-md-4 pr-1">
                 <div class="form-group">
                   <label><b>Session Year</b></label>
-                <input type="text" class="form-control @error('session') is-invalid @enderror" name="session" placeholder="Current Session">
+                <input type="text" class="form-control @error('session') is-invalid @enderror" name="session" placeholder="Current Session" value="{{$course->session }}">
 
                 @error('session')
                 <span class="invalid-feedback" role="alert">
@@ -150,7 +152,7 @@
               <div class="col-md-4 px-1">
                 <div class="form-group">
                   <label><b>Semester</b></label>
-                  <input type="text" class="form-control @error('semester') is-invalid @enderror" name="semester" placeholder="First or Second Semester">
+                  <input type="text" class="form-control @error('semester') is-invalid @enderror" name="semester" placeholder="First or Second Semester" value="{{$course->semester}}">
                   @error('semester')
                   <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
@@ -162,7 +164,7 @@
               <div class="col-md-4 pl-1">
                 <div class="form-group"> 
                   <label><b>Course Attempt Status</b></label>
-                  <input type="text" class="form-control @error('status') is-invalid @enderror" name="status" placeholder="Fresher or Repeater">
+                  <input type="text" class="form-control @error('status') is-invalid @enderror" name="status" placeholder="Fresher or Repeater" value="{{$course->status}}">
 
                   @error('status')
                   <span class="invalid-feedback" role="alert">
@@ -179,7 +181,7 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label><b>Contact Address</b></label>
-                <input type="text" class="form-control" name="address" readonly value="{{auth()->user()->address}}">
+                <input type="text" class="form-control @error('address') is-invalid @enderror" name="address"  value="{{auth()->user()->address}}">
 
                 @error('address')
                 <span class="invalid-feedback" role="alert">
@@ -195,7 +197,7 @@
               <div class="col-md-4 pr-1">
                 <div class="form-group">
                   <label><b>City</b></label>
-                <input type="text" class="form-control" name="city" readonly value="{{auth()->user()->city}}">
+                <input type="text" class="form-control @error('city') is-invalid @enderror" name="city"  value="{{auth()->user()->city}}">
 
                 @error('city')
                 <span class="invalid-feedback" role="alert">
@@ -208,7 +210,7 @@
               <div class="col-md-4 px-1">
                 <div class="form-group">
                   <label><b>Country</b></label>
-                <input type="text" class="form-control" name="country" readonly placeholder="Country" value="{{auth()->user()->country}}">
+                <input type="text" class="form-control @error('country') is-invalid @enderror" name="country"  placeholder="Country" value="{{auth()->user()->country}}">
 
                 @error('country')
                 <span class="invalid-feedback" role="alert">
@@ -221,7 +223,7 @@
               <div class="col-md-4 pl-1">
                 <div class="form-group">
                   <label><b>Phone Number</b></label>
-                <input type="text" class="form-control" readonly name="phone_number" value="{{auth()->user()->phone_number}}">
+                <input type="text" class="form-control @error('phone_number') is-invalid @enderror"  name="phone_number" value="{{auth()->user()->phone_number}}">
                 
                 @error('phone_number')
                 <span class="invalid-feedback" role="alert">
@@ -235,7 +237,7 @@
 
             <div class="row  d-flex align-item-center justify-content-center">
 
-              <button type="submit" class="btn btn-primary"><b>Register</b></button>
+              <button type="submit" class="btn btn-primary"><b>Update Course Registr</b></button>
             </div>
           </form>
         </div>
@@ -255,7 +257,7 @@
               <h5 class="title">{{auth()->user()->first_name}} {{auth()->user()->last_name}}</h5>
             </a>
             <p class="description">
-             <b>Registration No: 2020/{{auth()->user()->code}}</b> 
+             <b>Matric No: 2020/{{auth()->user()->code}}</b> 
             </p>
             <p class="description">
               {{auth()->user()->phone_number}}

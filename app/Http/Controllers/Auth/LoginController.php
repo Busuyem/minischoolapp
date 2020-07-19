@@ -29,7 +29,7 @@ class LoginController extends Controller
 
     protected function redirectTo(){
 
-        if(auth()->user()->id === 1){
+        if(auth()->user()->email === "admin@gmail.com"){
 
             return "/admin";
 

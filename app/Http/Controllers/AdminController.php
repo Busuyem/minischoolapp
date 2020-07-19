@@ -26,4 +26,21 @@ class AdminController extends Controller
         return view("users.users");
     }
 
+    public function deleteUser(User $user){
+
+        if($user->id !== auth()->user()->id){
+
+        foreach($user->courses as $course){
+
+            $course->delete();
+        }
+
+        $user->delete();
+
+        return back()->with('success', 'User has been successfully deleted');
+    }
+
+        return back()->with('delete', 'unauthorized to delete user');
+    }
+
 }

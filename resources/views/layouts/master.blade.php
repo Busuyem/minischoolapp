@@ -141,8 +141,6 @@
                   </p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
                   
                   <a class="dropdown-item" href="{{ route('logout') }}"
                          onclick="event.preventDefault();
@@ -157,7 +155,7 @@
                 </div>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#pablo">
+              <a class="nav-link" href="{{route('admin.dashboard')}}">
                   <i class="now-ui-icons users_single-02"></i>
                   <p>
                     <span class="d-lg-none d-md-block">Account</span>

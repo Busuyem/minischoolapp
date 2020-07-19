@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10 col-sm-12 col-xs-12">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header bg-info text-white text-center"><b>{{ __('2020 STUDENT REGISTRATION FORM') }}</b></div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
@@ -155,8 +155,8 @@
 
                             <div class="col-md-6">
                             <div class="form-group">
-                                <label for="course"><b>Choose Your Course of Interest</b></label>
-                                <select id="course" name="course" value="{{ old('course') }}" class="form-control">
+                                <label for="course"><b>Choice Course of Study</b></label>
+                                <select id="course" name="course" value="{{ old('course') }}" class="form-control @error('course') is-invalid @enderror">
                                   <option selected disabled>Select</option>
                                   <option>Medicine</option>
                                   <option>Engineering</option>
@@ -167,7 +167,7 @@
 
                                 @error('course')
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
+                                    <strong>{{$message }}</strong>
                                 </span>
                                 @enderror
 
@@ -179,11 +179,11 @@
 
                             <div class="col-md-4 ">
                                 <label for="file"><b>Your Photo</b></label>
-                                <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" placeholder="image">
+                                <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}">
 
                                 @error('image')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>{{ $message}}</strong>
                                     </span>
                                 @enderror
                             </div>
@@ -197,8 +197,21 @@
                                 <button type="submit" class="btn btn-primary">
                                     <b>{{ __('Submit your form') }}</b>
                                 </button>
+
+                                
                             </div>
                         </div>
+
+                        <div class="form-group row mb-0 ml-1">
+                            <div class="col-md-6 offset-md-4">
+                                <a href="{{route('login')}}" class="btn btn-dark">
+                                    <b>{{ __('Back to login') }}</b>
+                                </a>
+
+                                
+                            </div>
+                        </div>
+
                     </form>
                 </div>
             </div>

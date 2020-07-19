@@ -7,13 +7,17 @@
 <div class="row">
     <div class="col-md-12">
       <div class="card">
+        @include('inc.message')
         <div class="card-header">
-          <h4 class="card-title"> Simple Table</h4>
+          <h4 class="card-title">List of All the Students in the School</h4>
         </div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table">
               <thead class=" text-primary">
+                <th>
+                  S/N
+                </th>
                 <th>
                   Name
                 </th>
@@ -36,10 +40,13 @@
                 </th>
               </thead>
               <tbody>
-                @foreach ($users as $user)
-                    
-                
+                @foreach ($users as $key => $user)
                 <tr>
+
+                  <td>
+                    {{$key+1}}
+                  </td>
+
                   <td>
                     {{$user->first_name}} {{$user->last_name}}
                   </td>
@@ -58,31 +65,20 @@
 
                   <td>
                     @foreach($user->courses as $course)
-                      {{$course->course}}
+                      {{implode(',', $course->pluck('course')->toArray())}}
                     @endforeach
                   </td>
 
-                  <td>
-                   
-                    
-                  </td>
-
                   <td class="text-right">
-
-                    <div class="d-flex flex-row float-right">
-
-                      <a href="" class="btn btn-info">Edit</a>
-
-                      <form action="" method="post">
-
-                        <button class="btn btn-danger ml-1">Delete</button>
-
-                      </form>
-
+                    <div class="">
+                        <form action="{{route('user.destroy', $user)}}" method="post">
+                          @method('delete')
+                          @csrf
+                          
+                              <button class="bg-white text-danger"><i class="fas fa-trash-alt">Delete</i></button>
+                           
+                        </form>
                     </div>
-                     
-
-
                   </td>
                 </tr>
                 @endforeach
