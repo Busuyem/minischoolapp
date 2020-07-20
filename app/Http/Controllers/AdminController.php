@@ -10,7 +10,7 @@ class AdminController extends Controller
 {
     public function adminDashboard(){
 
-        $users = User::all();
+        $users = User::latest()->paginate(5);
 
         return view("admin.dashboard", compact('users'));
 
@@ -40,7 +40,7 @@ class AdminController extends Controller
         return back()->with('success', 'User has been successfully deleted');
     }
 
-        return back()->with('delete', 'unauthorized to delete user');
+        return back()->with('delete', 'unauthorized to remove the Administrator');
     }
 
 }

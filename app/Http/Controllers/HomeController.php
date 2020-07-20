@@ -23,6 +23,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        if(auth()->user()->email == "admin@gmail.com")
+        {
+
+            return redirect()->route('admin.dashboard');
+
+        }
+
+        return redirect()->route('user.dashboard');
     }
 }

@@ -39,14 +39,14 @@
       <!--Sidebar for User-->
       <div class="sidebar-wrapper" id="sidebar-wrapper">
         <ul class="nav">
-          <li class="active">
+         <li class="{{request()->routeIs('user.dashboard') ? 'active' : ''}}">
             <a href="{{route("course.register")}}">
               <i class="now-ui-icons design_app"></i>
               <p>Dashboard</p>
             </a>
           </li>
           
-          <li>
+          <li class="{{request()->routeIs('users.courses') ? 'active' : ''}}">
             <a href="{{route("users.courses")}}">
               <i class="now-ui-icons ui-1_bell-53"></i>
               <p>Your Registered Courses</p>
@@ -143,7 +143,6 @@
       </div>
       <!--Content Starts from Here -->
       <div class="content">
-        @include('inc.message')
           @yield("content")
      
       </div>
@@ -152,25 +151,6 @@
 
       <footer class="footer">
         <div class="container-fluid">
-          <nav>
-            <ul>
-              <li>
-                <a href="https://www.creative-tim.com">
-                  Creative Tim
-                </a>
-              </li>
-              <li>
-                <a href="http://presentation.creative-tim.com">
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="http://blog.creative-tim.com">
-                  Blog
-                </a>
-              </li>
-            </ul>
-          </nav>
           <div class="copyright" id="copyright">
             &copy;
             <script>

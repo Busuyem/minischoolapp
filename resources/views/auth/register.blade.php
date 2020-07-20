@@ -85,7 +85,7 @@
 
                             <div class="col-md-6">
                                 <label for="dob"><b>Date of Birth</b></label>
-                                <input id="dob" type="date" class="form-control @error('dob') is-invalid @enderror" name="dob" value="{{ old('dob') }}" required  placeholder="Enter Your Password">
+                                <input type="date" id="datepicker" class="form-control @error('dob') is-invalid @enderror" name="dob" value="{{ old('dob') }}" required  placeholder="Enter Your Date of Birth">
 
                                 @error('dob')
                                     <span class="invalid-feedback" role="alert">
@@ -218,4 +218,8 @@
         </div>
     </div>
 </div>
-@endsection
+
+
+@endsection 
+
+

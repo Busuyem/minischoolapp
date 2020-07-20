@@ -246,12 +246,31 @@
     <div class="col-md-4">
       <div class="card card-user">
         <div class="image">
-          <img src="{{asset('/assets/img/bg5.jpg')}}" alt="...">
+          <img src="{{asset('/assets/img/bg5.jpg')}}" alt="No Image">
         </div>
         <div class="card-body">
           <div class="author">
             <a href="#">
+              
+              {{--
+                Playholder Image to replace Heroku Image Uploading failure
+                --}}
+
+                <img class="avatar border-gray" src="{{asset('/assets/img/mike.jpg')}}" alt="...">
+
+              {{--This cannot work on Heroku Server
+              @if(auth()->user()->image)
+
+              <img class="avatar border-gray" src="{{asset('storage/'.auth()->user()->image)}}" alt="...">
+
+              @else
+
               <img class="avatar border-gray" src="{{asset('/assets/img/mike.jpg')}}" alt="...">
+
+              @endif
+
+              --}}
+
               <h5 class="title">{{auth()->user()->first_name}} {{auth()->user()->last_name}}</h5>
             </a>
             <p class="description">

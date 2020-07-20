@@ -40,7 +40,7 @@
 
       <div class="sidebar-wrapper" id="sidebar-wrapper">
         <ul class="nav">
-          <li>
+        <li class="{{request()->routeIs('admin.dashboard') ? 'active' : ''}}">
           <a href="{{route('admin.dashboard')}}">
               <i class="now-ui-icons design_app"></i>
               <p>Dashboard</p>
@@ -143,25 +143,6 @@
 
       <footer class="footer">
         <div class="container-fluid">
-          <nav>
-            <ul>
-              <li>
-                <a href="#>
-                  Creative Tim
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  Blog
-                </a>
-              </li>
-            </ul>
-          </nav>
           <div class="copyright" id="copyright">
             &copy;
             <script>

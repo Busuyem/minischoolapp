@@ -78,15 +78,6 @@ class RegisterController extends Controller
             
         ]);
 
-        if($data->has('image')){
-
-            $data['image'] = $data->image->store('images', 'public');
-
-            
-        }
-        
-        dd($data['image']);
-
         
     }
 
@@ -98,8 +89,9 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
        
-        return User::create([
+        $user = User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'phone_number' => $data['phone_number'],
@@ -111,8 +103,19 @@ class RegisterController extends Controller
             'country' => $data['country'],
             'gender' => $data['gender'],
             'course' => $data['course'],
-            'image' => $data['image'],
             'code' => mt_rand(100000,999999),
         ]);
+
+        if(request()->hasFile('image')){
+
+            $image = request()->image->getClientOriginalName();
+
+            $image = request()->image->store('images', 'public');
+
+            $user->update(['image' =>$image]);
+        }
+
+        return $user;
     }
+
 }

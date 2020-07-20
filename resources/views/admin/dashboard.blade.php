@@ -32,6 +32,10 @@
                   Department
               </th>
 
+              <th>
+                Sex
+            </th>
+
                 <th>
                     Registered Course(s)
                 </th>
@@ -64,6 +68,11 @@
                   </td>
 
                   <td>
+                    {{$user->gender}}
+                   
+                  </td>
+
+                  <td>
                     @foreach($user->courses as $course)
                       {{implode(',', $course->pluck('course')->toArray())}}
                     @endforeach
@@ -84,6 +93,7 @@
                 @endforeach
               </tbody>
             </table>
+            {{$users->links()}}
           </div>
         </div>
       </div>
