@@ -109,7 +109,7 @@
               <h5 class="title">{{auth()->user()->first_name}} {{auth()->user()->last_name}}</h5>
             </a>
             <p class="description">
-             <b>Registration No: 2020/{{auth()->user()->code}}</b> 
+             <b>Matric No: 2020/{{auth()->user()->code}}</b> 
             </p>
             <p class="description">
               {{auth()->user()->phone_number}}
