@@ -89,11 +89,11 @@
 
               {{--
                 Playholder Image to replace Heroku Image Uploading failure
+                <img class="avatar border-gray" src="{{asset('/assets/img/mike.jpg')}}" alt="...">
                 --}}
 
-                <img class="avatar border-gray" src="{{asset('/assets/img/mike.jpg')}}" alt="...">
 
-              {{--This cannot work on Heroku Server
+              
               @if(auth()->user()->image)
 
               <img class="avatar border-gray" src="{{asset('storage/'.auth()->user()->image)}}" alt="...">
@@ -104,7 +104,7 @@
 
               @endif
 
-              --}}
+             
 
               <h5 class="title">{{auth()->user()->first_name}} {{auth()->user()->last_name}}</h5>
             </a>

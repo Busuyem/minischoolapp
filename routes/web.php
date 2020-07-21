@@ -24,21 +24,33 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/admin', 'AdminController@adminDashboard')->name("admin.dashboard")->middleware(['auth', 'admin']);
 
-Route::get('/users', 'AdminController@userDashboard')->name('user.dashboard')->middleware('auth');
+Route::group(['Middleware' => ['auth', 'admin']],function(){
 
-Route::delete('/admin/user/{user}', 'AdminController@deleteUser')->name('user.destroy')->middleware(['auth', 'admin']);
+ Route::get('/admin', 'AdminController@adminDashboard')->name("admin.dashboard");
 
-Route::post('/users', 'CoursesController@addCourse')->name('course.register')->middleware('auth');
+ Route::get('/users', 'AdminController@userDashboard')->name('user.dashboard');
 
-Route::get('/course-lists', 'CoursesController@courseList')->name('users.courses')->middleware('auth');
+ Route::delete('/admin/user/{user}', 'AdminController@deleteUser')->name('user.destroy');
+});
 
-Route::get('/course-lists/edit/{id}', 'CoursesController@editCourse')->name('course.edit')->middleware('auth');
+Route::group(['Middleware' => 'auth'], function(){
 
-Route::put('/course-lists/edit/{course}', 'CoursesController@updateCourse')->name('course.update')->middleware('auth');
+    Route::post('/users', 'CoursesController@addCourse')->name('course.register');;
 
-Route::delete('/course-lists/edit/{course}', 'CoursesController@deleteCourse')->name('course.destroy')->middleware('auth');
+    Route::get('/course-lists', 'CoursesController@courseList')->name('users.courses');
+
+    Route::get('/course-lists/edit/{id}', 'CoursesController@editCourse')->name('course.edit');
+
+    Route::put('/course-lists/edit/{course}', 'CoursesController@updateCourse')->name('course.update');
+
+    Route::delete('/course-lists/edit/{course}', 'CoursesController@deleteCourse')->name('course.destroy');
+
+});
+
+
+
+
 
 
 
